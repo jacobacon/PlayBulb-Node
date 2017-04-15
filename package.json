@@ -1,0 +1,13 @@
+{
+  "name": "playbulb-node",
+  "author": "Jacob Beneski",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "echo 'Nope'"
+  },
+  "dependencies": {
+    "color-convert": "^1.9.0",
+    "noble": "^1.8.0"
+  }
+}
