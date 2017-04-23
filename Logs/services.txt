@@ -1,0 +1,89 @@
+fe004b0eace6
+peripheral with ID fe004b0eace6 found
+  Local Name        = PLAYBULB COMET
+  TX Power Level    = -2
+  Manufacturer Data = 4d49504f57
+  Service Data      =
+  Service UUIDs     = ff07
+
+services and characteristics:
+1800 (Generic Access)
+  2a00 (Device Name)
+    properties  read, write
+    value       504c415942554c4220434f4d4554 | 'PLAYBULB COMET'
+  2a01 (Appearance)
+    properties  read
+    value       4003 | '@'
+  2a04 (Peripheral Preferred Connection Parameters)
+    properties  read
+    value       1000200000005802 | ' X'
+1801 (Generic Attribute)
+  2a05 (Service Changed)
+    properties  read, indicate
+    value       0500ffff | ''
+ff07
+  2a37 (Heart Rate Measurement)
+    properties  notify
+  2a39 (Heart Rate Control Point)
+    properties  read, writeWithoutResponse, write
+    value        | ''
+  fff8
+    properties  read
+    value       0000000000000000000000000000000000000000 | ''
+  fff9
+    properties  read, write
+    value       000000ffffffff000000000000 | ''
+  fffa
+    properties  read, writeWithoutResponse
+    value       00 | ''
+  fffb
+    properties  read, writeWithoutResponse
+    value       00ff00000100afaf | '//'
+  fffc
+    properties  read, writeWithoutResponse
+    value       00000000 | ''
+  fffd
+    properties  read, write
+    value       00000000 | ''
+  fffe
+    properties  read, write
+    value       04ffff04ffff04ffff04ffff0000 | ''
+  ffff
+    properties  read, write
+    value       504c415942554c4220434f4d4554 | 'PLAYBULB COMET'
+180f (Battery Service)
+  2a19 (Battery Level)
+    properties  read, notify
+    value        | ''
+180a (Device Information)
+  2a25 (Serial Number String)
+    properties  read
+    value       42544c353031 | 'BTL501'
+  2a27 (Hardware Revision String)
+    properties  read
+    value       4353523130317820413035 | 'CSR101x A05'
+  2a26 (Firmware Revision String)
+    properties  read
+    value       42544c3530315f7631 | 'BTL501_v1'
+  2a28 (Software Revision String)
+    properties  read
+    value       4170706c69636174696f6e2076657273696f6e20322e342e332e3236 | 'Application version 2.4.3.26'
+  2a29 (Manufacturer Name String)
+    properties  read
+    value       4d69706f77204c696d69746564 | 'Mipow Limited'
+  2a50 (PnP ID)
+    properties  read
+    value       010a004c010001 | '
+L'
+00001016d10211e19b2300025b00a5a5
+  00001013d10211e19b2300025b00a5a5
+    properties  read, write
+    value       01 | ''
+  00001018d10211e19b2300025b00a5a5
+    properties  write
+  00001014d10211e19b2300025b00a5a5
+    properties  read, notify
+    value        | ''
+  00001011d10211e19b2300025b00a5a5
+    properties  read
+    value       06 | ''

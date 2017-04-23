@@ -1,6 +1,8 @@
 var noble = require('noble');
 var convert = require('color-convert');
 
+var bluetoothHelper = require('./bluetooth.js');
+
 
 noble.on('stateChange', function (state) {
     if (state === 'poweredOn') {
@@ -18,73 +20,62 @@ noble.on('discover', function (peripheral) {
 
         var advert = peripheral.advertisement;
 
-        var localName = advert.localName;
-        var serviceData = advert.serviceData;
-
 
         connectToPeripheral(peripheral);
 
     }
+});
 
-    function connectToPeripheral(peripheral) {
+function connectToPeripheral(peripheral) {
 
-        peripheral.connect(function (error) {
-            peripheral.discoverServices(['ff07'], function (error, services) {
-                console.log(services);
+    peripheral.connect(function (error) {
+        peripheral.discoverServices(['ff07'], function (error, services) {
+            console.log(services);
 
-                var colorService = services[0];
-                console.log('Discovered Service');
+            var colorService = services[0];
+            console.log('Discovered Service');
 
-                colorService.discoverCharacteristics(['fffc'], function (error, characteristics) {
-                    console.log(characteristics);
-                    var colorCharacteristic = characteristics[0];
+            colorService.discoverCharacteristics(['fffc'], function (error, characteristics) {
+                console.log(characteristics);
+                var colorCharacteristic = characteristics[0];
 
-                    console.log('Discovered Characteristic');
-
-
-                    var data = new Buffer("090000ff", "hex");
+                console.log('Discovered Characteristic');
 
 
-                    colorCharacteristic.write(data, true, function (err) {
-
-                        if (!err) {
-                            console.log('Changed color to: ');
-                        } else {
-                            console.error(err);
-                        }
-
-
-                        //changeColor(colorCharacteristic, 'green');
-
-
-                    });
-
-                });
+                changeColor(colorCharacteristic, '00', 'cyan');
 
 
             });
 
-
         });
 
 
-    }
-
-
-});
-
-
-function changeColor(colorCharacteristic, newColor) {
+    });
 
 
 }
 
-function killLights(colorCharacter) {
 
-    //Sets the color to 'black' which is off
-    var data = new Buffer("00000000", "hex");
-    colorCharacter.write(data, true, function(err){
+function changeColor(colorCharacteristic, intensity, newColor) {
+
+    //var data = new Buffer("00ff00000100af00", "hex");
+    var newColorHex = convert.keyword.hex(newColor);
+
+    var data = new Buffer(intensity + newColorHex, "hex");
+
+
+
+
+    colorCharacteristic.write(data, true, function (err) {
+
+        if (!err) {
+            console.log('Changed color to: ' + newColor);
+        } else {
+            console.error(err);
+        }
+
 
     });
+
 
 }
