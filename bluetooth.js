@@ -7,8 +7,8 @@
 
 var functions = {
 
-    changeSolidColor: function () {
-        return null;
+    changeSolidColor: function (newColor) {
+
 
     },
 

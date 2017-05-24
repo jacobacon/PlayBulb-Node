@@ -1,7 +1,10 @@
 var noble = require('noble');
 var convert = require('color-convert');
+var argv = require('yargs').argv;
 
 var bluetoothHelper = require('./bluetooth.js');
+
+var peripheral;
 
 
 noble.on('stateChange', function (state) {
@@ -28,6 +31,10 @@ noble.on('discover', function (peripheral) {
 
 function connectToPeripheral(peripheral) {
 
+    peripheral.on('disconnect', function() {
+        process.exit(0);
+    })
+
     peripheral.connect(function (error) {
         peripheral.discoverServices(['ff07'], function (error, services) {
             console.log(services);
@@ -42,7 +49,8 @@ function connectToPeripheral(peripheral) {
                 console.log('Discovered Characteristic');
 
 
-                changeColor(colorCharacteristic, '00', 'cyan');
+
+                changeColor(colorCharacteristic, '00', argv.color);
 
 
             });
@@ -52,13 +60,19 @@ function connectToPeripheral(peripheral) {
 
     });
 
+    console.log('About to disconnect');
+
+    peripheral.disconnect();
+
+    console.log('Disconnected');
+
 
 }
 
 
 function changeColor(colorCharacteristic, intensity, newColor) {
 
-    //var data = new Buffer("00ff00000100af00", "hex");
+
     var newColorHex = convert.keyword.hex(newColor);
 
     var data = new Buffer(intensity + newColorHex, "hex");
@@ -70,8 +84,13 @@ function changeColor(colorCharacteristic, intensity, newColor) {
 
         if (!err) {
             console.log('Changed color to: ' + newColor);
+
+
+
+            //process.exit(0)
         } else {
             console.error(err);
+           // process.exit(1);
         }
 
 
