@@ -31,6 +31,8 @@ noble.on('discover', function (peripheral) {
 
 function connectToPeripheral(peripheral) {
 
+
+
     peripheral.on('disconnect', function() {
         process.exit(0);
     })
@@ -53,12 +55,15 @@ function connectToPeripheral(peripheral) {
                 changeColor(colorCharacteristic, '00', argv.color);
 
 
+
+
             });
 
         });
 
 
     });
+
 
     console.log('About to disconnect');
 
